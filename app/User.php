@@ -69,4 +69,18 @@ class User extends Authenticatable
       {
           return $this->hasOne(Address::class, 'billing_address', 'id');
       }
+
+      // this user own one wislist
+      public function wishlist()
+      {
+          return $this->hasOne(WishList::class);
+      }
+
+      //this user own many reviews
+
+      public function reviews()
+      {
+          return $this->hasMany(Review::class);
+      }
+
 }

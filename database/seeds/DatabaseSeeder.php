@@ -5,6 +5,7 @@ use App\Image;
 use Illuminate\Database\Seeder;
 use App\User;
 use App\Product;
+use App\Review;
 
 class DatabaseSeeder extends Seeder
 {
@@ -20,6 +21,6 @@ class DatabaseSeeder extends Seeder
         factory(User::class, 500 )->create();
         factory(Product::class, 1500)->create();
         factory(Image::class, 3500)->create();
-
+        factory(Review::class, 3500)->create();
     }
 }
