@@ -42,3 +42,12 @@ Route::get('/', function () {
 });
 
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+
+Route::get('test-email', function(){
+    return 'Hello';
+})->middleware(['auth', 'email_verified']);
