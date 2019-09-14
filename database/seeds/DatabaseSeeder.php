@@ -7,6 +7,7 @@ use App\User;
 use App\Product;
 use App\Review;
 use App\Category;
+use App\Tag;
 
 class DatabaseSeeder extends Seeder
 {
@@ -24,5 +25,6 @@ class DatabaseSeeder extends Seeder
         // factory(Image::class, 3500)->create();
         // factory(Review::class, 3500)->create();
         // factory(Category::class, 50)->create();
+        //  factory(Tag::class, 150)->create();
     }
 }

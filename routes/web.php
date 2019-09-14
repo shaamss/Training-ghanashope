@@ -16,7 +16,9 @@ use App\Country;
 use App\User;
 use App\Image;
 use App\Product;
+use App\Role;
 use App\State;
+use App\Tag;
 
 Route::get('states', function () {
 
@@ -42,6 +44,21 @@ Route::get('/', function () {
 });
 
 
+Route::get('role-test', function () {
+    // $user =User::find(1);
+    // return $user->roles;
+
+    $role =Role::find(2);
+    return $role->users;
+});
+
+Route::get('tag-test', function () {
+    // $tag = Tag::find(5);
+    // return $tag->products;
+
+    $product = Product::find(2);
+    return $product->tags;
+});
 
 Auth::routes();
 
@@ -50,4 +67,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('test-email', function(){
     return 'Hello';
-})->middleware(['auth', 'email_verified']);
+})->middleware(['auth', 'user_is_admin' ,'user_is_support']);
