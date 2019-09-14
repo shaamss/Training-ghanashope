@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddDiscountToProducts extends Migration
+class CreateSupportTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class AddDiscountToProducts extends Migration
      */
     public function up()
     {
-        Schema::table('products', function (Blueprint $table) {
-            $table->addColumn('double','discount')->nullable();
+        Schema::create('support_types', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('type'); // finance, quality, shipment
+            $table->timestamps();
         });
     }
 
@@ -25,8 +27,6 @@ class AddDiscountToProducts extends Migration
      */
     public function down()
     {
-        Schema::table('products', function (Blueprint $table) {
-            $table->dropColumn('discount');
-        });
+        Schema::dropIfExists('support_types');
     }
 }

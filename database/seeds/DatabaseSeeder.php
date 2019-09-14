@@ -25,6 +25,6 @@ class DatabaseSeeder extends Seeder
         // factory(Image::class, 3500)->create();
         // factory(Review::class, 3500)->create();
         // factory(Category::class, 50)->create();
-        //  factory(Tag::class, 150)->create();
+        // factory(Tag::class, 150)->create();
     }
 }
