@@ -8,6 +8,7 @@ use App\Product;
 use App\Review;
 use App\Category;
 use App\Tag;
+use App\Ticket;
 
 class DatabaseSeeder extends Seeder
 {
@@ -26,5 +27,6 @@ class DatabaseSeeder extends Seeder
         // factory(Review::class, 3500)->create();
         // factory(Category::class, 50)->create();
         // factory(Tag::class, 150)->create();
+        // factory(Ticket::class, 150)->create();
     }
 }
