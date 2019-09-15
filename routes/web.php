@@ -23,23 +23,6 @@ use App\Tag;
 
 // Route::get('import-test', 'DataImportController@importUnits' );
 
-Route::get('states', function () {
-
-    return State::with(['country', 'cities'])->paginate(5);
-
-});
-
-Route::get('users', function () {
-    return User::paginate(50);
-});
-
-Route::get('product', function () {
-    return Product::with(['images'])->paginate(50);
-});
-
-Route::get('images', function () {
-    return Image::with(['product'])-> paginate(100);
-});
 
 
 Route::get('/', function () {
@@ -68,6 +51,12 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 
-Route::get('test-email', function(){
-    return 'Hello';
-})->middleware(['auth', 'user_is_admin' ,'user_is_support']);
+// Route::get('test-email', function(){
+//     return 'Hello';
+// })->middleware(['auth', 'user_is_admin' ,'user_is_support']);
+
+
+Route::group(['Auth','user_is_admin'], function () {
+    Route::get('units','UnitController@index')->name('units');
+    Route::get('add-unit', 'UnitController@showAdd')->name('new-unit');
+});
