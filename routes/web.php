@@ -13,12 +13,15 @@
 
 use App\City;
 use App\Country;
+use App\Http\Controllers\DataImportController;
 use App\User;
 use App\Image;
 use App\Product;
 use App\Role;
 use App\State;
 use App\Tag;
+
+// Route::get('import-test', 'DataImportController@importUnits' );
 
 Route::get('states', function () {
 
