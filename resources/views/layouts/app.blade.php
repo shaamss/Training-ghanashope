@@ -71,6 +71,11 @@
                                             {{ __('units') }}
                                         </a>
 
+                                            {{-- Tags --}}
+                                            <a class="dropdown-item" href="{{ route('tags') }}">
+                                                    {{ __('tags') }}
+                                                </a>
+
                                         {{-- logout --}}
                                         <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
