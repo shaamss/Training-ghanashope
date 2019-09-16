@@ -8,6 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
+          {{-- <title>{{ config('app.name',@yield('title')) }}</title> --}}
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -55,11 +56,27 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
+                                            {{-- Categories --}}
+                                        <a class="dropdown-item" href="{{ route('categories') }}">
+                                            {{ __('categories') }}
+                                        </a>
+
+                                             {{-- Products --}}
+                                        <a class="dropdown-item" href="{{ route('products') }}">
+                                            {{ __('products') }}
+                                        </a>
+
+                                            {{-- Units --}}
+                                        <a class="dropdown-item" href="{{ route('units') }}">
+                                            {{ __('units') }}
+                                        </a>
+
+                                        {{-- logout --}}
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                        document.getElementById('logout-form').submit();">
+                                            {{ __('Logout') }}
+                                        </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf

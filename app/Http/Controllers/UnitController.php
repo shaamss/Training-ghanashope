@@ -21,10 +21,6 @@ class UnitController extends Controller
         );
     }
 
-    public function showAdd()
-    {
-        return view('admin.units.add_edit');
-    }
 
 
 }

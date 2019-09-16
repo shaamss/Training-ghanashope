@@ -57,6 +57,27 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 Route::group(['Auth','user_is_admin'], function () {
+    // units
     Route::get('units','UnitController@index')->name('units');
-    Route::get('add-unit', 'UnitController@showAdd')->name('new-unit');
+
+    // categories
+    Route::get('categories','CategoryController@index')->name('categories');
+
+    // products
+    Route::get('products','ProductController@index')->name('products');
+    // tags
+
+    // orders
+    // payments
+    // shipments
+
+    // countries
+    // states
+    // cities
+
+    // reviews
+    // tickets
+
+    // roles
+
 });
