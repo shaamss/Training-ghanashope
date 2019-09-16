@@ -14,7 +14,7 @@ class UnitController extends Controller
      */
     public function index()
     {
-        $units = Unit::paginate(16);
+        $units = Unit::paginate(env('PAGINATION_COUNT'));
 
         return view('admin.units.units')->with(
             ['units' => $units]

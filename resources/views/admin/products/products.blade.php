@@ -11,10 +11,15 @@
                         <div class="row">
                             @foreach ($products as $product)
 
-                            <div class="col-md-3">
+                            <div class="col-md-4">
 
                                 <div class="alert alert-primary" role="alert">
-                                  <p>{{ $product->title }}</p>
+                                  <h3>{{ $product->title }}</h3>
+                                   <p>Category: {{ $product->category->name }}</p>
+                                    <p>Price: {{ $product->price }} {{ $currency_code }}</p>
+                                   {{-- if exist images = Show image | elss = show '' --}}
+                                   {!! (count($product->images)>0) ? '<img class="img-thumbnail card-img" src= " '. $product->images[0]->url .' ">' : '' !!}
+                                   {{-- <img class="img-thumbnail card-img" src="{{ (count($product->images)>0) ? $product->images[0]->url : '' }}" alt=""> --}}
                                 </div>
 
                             </div>

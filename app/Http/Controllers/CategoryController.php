@@ -9,7 +9,7 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $categories =Category::paginate(16);
+        $categories =Category::paginate(env('PAGINATION_COUNT'));
 
         return view('admin.categories.categories')->with([
             'categories' => $categories,

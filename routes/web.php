@@ -65,6 +65,7 @@ Route::group(['Auth','user_is_admin'], function () {
 
     // products
     Route::get('products','ProductController@index')->name('products');
+
     // tags
 
     // orders
