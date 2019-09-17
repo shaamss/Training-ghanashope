@@ -66,6 +66,21 @@
                                             {{ __('products') }}
                                         </a>
 
+                                         {{-- Countries --}}
+                                         <a class="dropdown-item" href="{{ route('countries') }}">
+                                                {{ __('countries') }}
+                                            </a>
+
+                                            {{-- Cities --}}
+                                         <a class="dropdown-item" href="{{ route('cities') }}">
+                                                {{ __('cities') }}
+                                            </a>
+
+                                               {{-- States --}}
+                                         <a class="dropdown-item" href="{{ route('states') }}">
+                                                {{ __('states') }}
+                                            </a>
+
                                             {{-- Units --}}
                                         <a class="dropdown-item" href="{{ route('units') }}">
                                             {{ __('units') }}

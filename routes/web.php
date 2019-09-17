@@ -73,8 +73,14 @@ Route::group(['Auth','user_is_admin'], function () {
     // shipments
 
     // countries
+    Route::get('countries','CountryController@index')->name('countries');
+
     // states
+
+    Route::get('states', 'StateController@index')->name('states');
+
     // cities
+    Route::get('cities', 'CityController@index')->name('cities');
 
     // reviews
     // tickets
