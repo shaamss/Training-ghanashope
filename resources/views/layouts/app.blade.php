@@ -81,6 +81,11 @@
                                                 {{ __('states') }}
                                             </a>
 
+                                                   {{-- Reviews --}}
+                                         <a class="dropdown-item" href="{{ route('reviews') }}">
+                                                {{ __('reviews') }}
+                                            </a>
+
                                             {{-- Units --}}
                                         <a class="dropdown-item" href="{{ route('units') }}">
                                             {{ __('units') }}

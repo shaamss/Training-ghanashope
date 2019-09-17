@@ -83,6 +83,7 @@ Route::group(['Auth','user_is_admin'], function () {
     Route::get('cities', 'CityController@index')->name('cities');
 
     // reviews
+    Route::get('reviews', 'ReviewController@index')->name('reviews');
     // tickets
 
     // roles
