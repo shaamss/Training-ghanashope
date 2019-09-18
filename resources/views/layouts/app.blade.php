@@ -100,6 +100,16 @@
                                                     {{ __('tags') }}
                                                 </a>
 
+                                                {{-- Tickets --}}
+                                            <a class="dropdown-item" href="{{ route('tickets') }}">
+                                                    {{ __('tickets') }}
+                                                </a>
+
+                                                    {{-- Roles --}}
+                                            <a class="dropdown-item" href="{{ route('roles') }}">
+                                                    {{ __('roles') }}
+                                                </a>
+
                                         {{-- logout --}}
                                         <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
