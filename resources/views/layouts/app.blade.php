@@ -10,6 +10,10 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
           {{-- <title>{{ config('app.name',@yield('title')) }}</title> --}}
 
+    <!-- FontAwesome -->
+    {{-- crossorigin="anonymous" next in end tag font awesome --}}
+    <script src="https://kit.fontawesome.com/b385da3ee7.js" ></script>
+
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 
