@@ -35,6 +35,15 @@
                                     <div class="col-md-3">
 
                                         <div class="alert alert-primary" role="alert">
+
+                                            <span>
+                                                <form action="{{ route('units') }}" method="POST" style="position:relative">
+                                                    @csrf
+                                                    <input type="hidden" name="_method" value="delete"/>
+                                                    <input type="hidden" name="unit_id" value="{{ $unit->id }}">
+                                                    <button type="submit" class="delete-btn"><i class="fas fa-trash-alt"></i></button>
+                                                </form>
+                                            </span>
                                                 <p>{{ $unit->unit_name }}, {{ $unit->unit_code }}</p>
                                         </div>
 
