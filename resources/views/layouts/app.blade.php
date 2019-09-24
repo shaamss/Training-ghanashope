@@ -14,9 +14,6 @@
     {{-- crossorigin="anonymous" next in end tag font awesome --}}
     <script src="https://kit.fontawesome.com/b385da3ee7.js" ></script>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -132,5 +129,18 @@
             @yield('content')
         </main>
     </div>
+
+    <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+
+  <!-- Scripts -->
+  {{-- <script src="{{ URL::asset('js/jquery-3.4.1.min.js') }}" defer></script> --}}
+  <!-- Scripts -->
+    <script src="{{ URL::asset('js/app.js') }}" ></script>
+
+    @yield('script')
+
 </body>
 </html>
