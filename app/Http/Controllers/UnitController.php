@@ -25,6 +25,7 @@ class UnitController extends Controller
 
     public function store(Request $request)
     {
+        //TODO check if the unit already exists
         $request->validate([
             'unit_name' =>'required',
             'unit_code' => 'required'
@@ -41,8 +42,19 @@ class UnitController extends Controller
         return redirect()->back();
     }
 
+    public function update(Request $request)
+    {
+        //TODO update the given unit
+    }
+
     public function delete(Request $request)
     {
+
+        if( is_null($request->input('unit_id')) || empty($request->input('unit_id'))){
+            Session::flash('message','Unit ID is required');
+            return redirect()->back();
+        }
+
         $id = $request->input('unit_id');
         Unit::destroy($id);
 

@@ -20,3 +20,20 @@
     position: absolute;
     right: 5px;
 }
+
+.btn-spans {
+    position: absolute;
+    right: 15px;
+}
+
+span.btn-spans span:first-child{
+margin-right: 10px;
+}
+
+span.btn-spans span:first-child a{
+    color: green;
+}
+
+span.btn-spans span:last-child a{
+    color: red;
+}

@@ -35,16 +35,15 @@
                                     <div class="col-md-3">
 
                                         <div class="alert alert-primary" role="alert">
-
-                                            <span>
-                                                <form action="{{ route('units') }}" method="POST" style="position:relative">
-                                                    @csrf
-                                                    <input type="hidden" name="_method" value="delete"/>
-                                                    <input type="hidden" name="unit_id" value="{{ $unit->id }}">
-                                                    <button type="submit" class="delete-btn"><i class="fas fa-trash-alt"></i></button>
-                                                </form>
+                                            <span class="btn-spans">
+                                                {{-- data attribute from php to js --}}
+                                                <span><a class="edit-unit" ><i class="fas fa-edit"></i></a></span>
+                                                <span><a class="delete-unit"
+                                                    data-unitname = "{{ $unit->unit_name }}"
+                                                    data-unitcode = "{{ $unit->unit_code }}"
+                                                    data-unitid="{{ $unit->id }}" ><i class="fas fa-trash-alt"></i></a></span>
                                             </span>
-                                                <p>{{ $unit->unit_name }}, {{ $unit->unit_code }}</p>
+                                        <p>{{ $unit->unit_name }}, {{ $unit->unit_code }}</p>
                                         </div>
 
                                     </div>
@@ -59,9 +58,65 @@
 </div>
 
 
+        {{-- edit modal --}}
+
+    <div class="modal edit-window" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Modal title</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p>Modal body text goes here.</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {{-- delete  modal --}}
+
+          <div class="modal delete-window" tabindex="-1" role="dialog" id="delete-window">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Delete Unit</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+
+                    {{-- delete form --}}
+
+                    <form action="{{ route('units') }}" method="POST" style="position:relative">
+                            @csrf
+                        <div class="modal-body">
+                            <p id="delete-message"> </p>
+
+                            <input type="hidden" name="_method" value="delete"/>
+                            <input type="hidden" name="unit_id" value="" id="unit_id">
+
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
+                            <button type="submit" class="btn btn-primary">DELETE</button>
+                        </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+
 
 @if (Session::has('message'))
-        <div class="toast" style="position: absolute; top: 8%; right: 50%;">
+              {{-- Toast --}}
+        <div class="toast" style="position: absolute; top: 10%; right: 10%;">
             <div class="toast-header">
                 <strong class="mr-auto">Unit</strong>
                 {{-- <small>11 mins ago</small> --}}
@@ -80,18 +135,38 @@
 
 @endsection
 
- @if (Session::has('message'))
-    @section('script')
+@section('script')
 
         <script>
-            jQuery(document).ready(function($){
-                var $toast = $('.toast').toast({
-                    autohide :false
+            $(document).ready(function(){
+                var $deleteUnit =$('.delete-unit');
+                var $deleteWindow = $('#delete-window');
+                var $unitId= $('#unit_id');
+                var $deleteMessage = $('#delete-message');
+                    //this behavior default scroll from down to up
+                $deleteUnit.on('click', function(element){
+                    //stop behavior default
+                    element.preventDefault();
+                    // gevin data from data Attribute
+                    var unit_id = $(this).data('unitid');
+                    var $unit_name = $(this).data('unitname');
+                    var $unit_code = $(this).data('unitcode');
+                    $unitId.val(unit_id);
+                    $deleteMessage.text('Are you sure you want to delete ' + ' \[ ' + $unit_name + ' \] ' +' with code ' + ' \[ ' + $unit_code + ' \] ' + " ? ");
+                    $deleteWindow.modal('show');
                 });
-
-                $toast.toast('show');
-            })
+            });
         </script>
 
-    @endsection
-@endif
+    @if (Session::has('message'))
+                <script>
+                    jQuery(document).ready(function($){
+                        var $toast = $('.toast').toast({
+                            autohide :false
+                        });
+
+                        $toast.toast('show');
+                    })
+                </script>
+    @endif
+@endsection
