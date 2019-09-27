@@ -37,7 +37,11 @@
                                         <div class="alert alert-primary" role="alert">
                                             <span class="btn-spans">
                                                 {{-- data attribute from php to js --}}
-                                                <span><a class="edit-unit" ><i class="fas fa-edit"></i></a></span>
+                                                <span><a class="edit-unit"
+                                                    data-uniteditname = "{{ $unit->unit_name }}"
+                                                    data-uniteditcode = "{{ $unit->unit_code }}"
+                                                    data-uniteditid="{{ $unit->id }}"><i class="fas fa-edit"></i></a></span>
+
                                                 <span><a class="delete-unit"
                                                     data-unitname = "{{ $unit->unit_name }}"
                                                     data-unitcode = "{{ $unit->unit_code }}"
@@ -60,7 +64,7 @@
 
         {{-- edit modal --}}
 
-    <div class="modal edit-window" tabindex="-1" role="dialog">
+    <div class="modal edit-window" tabindex="-1" role="dialog" id="edit-window">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
@@ -70,12 +74,32 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  <p>Modal body text goes here.</p>
+                        <form method="post" action="{{ 'units' }}">
+                                @csrf
+
+                                    <div class="form-group col-md-6">
+                                        <label for="edit_unit_name">Unit Name</label>
+                                        <input type="text" class="form-control" id="edit_unit_name" name="unit_name" placeholder="Unit Name" required >
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                            <label for="edit_unit_code">Unit Code</label>
+                                            <input type="text" class="form-control" id="edit_unit_code" name="unit_code" placeholder="Unit Code" required >
+                                    </div>
+
+                                    <input type="hidden" name="_method" value="put"/>
+                                    <input type="hidden" name="unit_id" value="" id="edit_unit_id">
+
+                                    {{-- <div class="form-group col-md-12">
+                                        <button type="submit" class="btn btn-primary">Save New Unit</button>
+                                    </div> --}}
+
+
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Save changes</button>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
+                  <button type="submit" class="btn btn-primary">UPDATE</button>
                 </div>
+            </form>
               </div>
             </div>
           </div>
@@ -154,6 +178,25 @@
                     $unitId.val(unit_id);
                     $deleteMessage.text('Are you sure you want to delete ' + ' \[ ' + $unit_name + ' \] ' +' with code ' + ' \[ ' + $unit_code + ' \] ' + " ? ");
                     $deleteWindow.modal('show');
+                });
+
+                var $editUnit = $('.edit-unit');
+                var $editWindow = $('#edit-window');
+
+                var $edit_unit_name = $('#edit_unit_name');
+                var $edit_unit_code = $('#edit_unit_code');
+                var $edit_unit_id = $('#edit_unit_id');
+
+                $editUnit.on('click',function(element){
+                    element.preventDefault();
+                    var $unit_edit_name = $(this).data('uniteditname');
+                    var $unit_edit_code = $(this).data('uniteditcode');
+                    var $unit_edit_id = $(this).data('uniteditid');
+
+                    $edit_unit_name.val($unit_edit_name);
+                    $edit_unit_code.val($unit_edit_code);
+                    $edit_unit_id.val($unit_edit_id);
+                    $editWindow.modal('show');
                 });
             });
         </script>

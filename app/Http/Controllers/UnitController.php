@@ -45,6 +45,22 @@ class UnitController extends Controller
     public function update(Request $request)
     {
         //TODO update the given unit
+        $request->validate([
+            'unit_id' => 'required',
+            'unit_name' => 'required',
+            'unit_code' => 'required'
+        ]);
+
+        $unitUpdateID = intval ($request->input('unit_id'));
+        $unit = Unit::find($unitUpdateID);
+
+        $unit->unit_name = $request->input('unit_name');
+        $unit->unit_code = $request->input('unit_code');
+        $unit->save();
+
+        Session::flash('message','Unit ' . $unit->unit_name . ' has been updated !');
+
+        return redirect()->back();
     }
 
     public function delete(Request $request)
