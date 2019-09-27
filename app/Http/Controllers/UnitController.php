@@ -22,6 +22,38 @@ class UnitController extends Controller
             ['units' => $units]
         );
     }
+     //validation if unit name exist
+    private function unitNameExist($unitName)
+    {
+        $unit = Unit::where(
+            'unit_name', '=' , $unitName
+        )->first();
+        if (!is_null($unit))
+        {
+            Session::flash('message', 'Unit Name [ ' . $unitName .  ' ] Already Exist');
+
+            return false;
+        }
+
+        return true;
+    }
+
+    //validation if unit code exist
+    private function unitCodeExist($unitCode)
+    {
+        $unit = Unit::where(
+            'unit_code', '=' , $unitCode
+        )->first();
+        if (!is_null($unit))
+        {
+            Session::flash('message', 'Unit Code [ '. $unitCode .' ] Already Exist');
+            return false;
+        }
+
+        return true;
+    }
+
+
 
     public function store(Request $request)
     {
@@ -30,6 +62,18 @@ class UnitController extends Controller
             'unit_name' =>'required',
             'unit_code' => 'required'
         ]);
+
+        $unitName = $request->input('unit_name');
+        $unitCode = $request->input('unit_code');
+
+        if(! $this->unitNameExist($unitName)){
+
+            return redirect()->back();
+        }
+        if(! $this->unitCodeExist($unitCode)){
+
+            return redirect()->back();
+        }
 
         $unit = new Unit();
         $unit->unit_name = $request->input('unit_name');
@@ -50,6 +94,18 @@ class UnitController extends Controller
             'unit_name' => 'required',
             'unit_code' => 'required'
         ]);
+
+        $unitName = $request->input('unit_name');
+        $unitCode = $request->input('unit_code');
+
+        if(! $this->unitNameExist($unitName)){
+
+            return redirect()->back();
+        }
+        if(! $this->unitCodeExist($unitCode)){
+
+            return redirect()->back();
+        }
 
         $unitUpdateID = intval ($request->input('unit_id'));
         $unit = Unit::find($unitUpdateID);
@@ -78,8 +134,5 @@ class UnitController extends Controller
 
         return redirect()->back();
     }
-
-
-
 
 }
