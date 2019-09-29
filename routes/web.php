@@ -73,6 +73,9 @@ Route::group(['Auth','user_is_admin'], function () {
     // tags
     Route::get('tags','TagController@index')->name('tags');
     Route::post('tags','TagController@store');
+    Route::delete('tags','TagController@delete');
+    Route::put('tags','TagController@update');
+    Route::post('search-tags','TagController@search')->name('search-tags');
     // orders
     // payments
     // shipments
