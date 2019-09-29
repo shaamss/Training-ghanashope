@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
 
+
 class UnitController extends Controller
 {
     /**
@@ -19,9 +20,42 @@ class UnitController extends Controller
         $units = Unit::paginate(env('PAGINATION_COUNT'));
 
         return view('admin.units.units')->with(
-            ['units' => $units]
+            [
+                'units' => $units,
+                'showLinks' => true
+
+            ]
         );
     }
+
+    public function search(Request $request)
+    {
+
+        $request->validate([
+            'unit_search' => 'required',
+        ]);
+
+        $searchTerm = $request->input('unit_search');
+
+        $units = Unit::where(
+            'unit_name', 'LIKE', '%' . $searchTerm . '%'
+        )->get();
+
+
+        if (count($units) > 0)
+        {
+            return view('admin.units.units')->with([
+                'units' => $units,
+                'showLinks' => false ,
+            ]);
+        }
+
+
+        Session::flash('message', 'Nothing Found !!!');
+        return redirect()->back();
+
+    }
+
      //validation if unit name exist
     private function unitNameExist($unitName)
     {
