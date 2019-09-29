@@ -39,6 +39,8 @@ class UnitController extends Controller
 
         $units = Unit::where(
             'unit_name', 'LIKE', '%' . $searchTerm . '%'
+        )->orWhere(
+            'unit_code', 'LIKE', '%' . $searchTerm . '%'
         )->get();
 
 
