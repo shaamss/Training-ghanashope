@@ -45,9 +45,12 @@
 
                         @endforeach
                     </div>
-                    {{ $tags->links() }}
+                    {{-- {{ $tags->links() }} --}}
+                    {{ (! is_null($showLinks) && $showLinks) ? $tags->links() : '' }}
 
-                    <form method="post" action="{{ route('search-tags') }}" >
+                    {{-- Search Tag --}}
+
+                    <form method="get" action="{{ route('search-tags') }}" >
                             @csrf
                             <div class="row">
 
@@ -125,7 +128,7 @@
 
                     {{-- delete form --}}
 
-                    <form action="{{ route('tags') }}" method="POST" style="position:relative">
+                    <form action="{{ route('tags') }}" method="get" style="position:relative">
                             @csrf
                         <div class="modal-body">
                             <p id="delete-message"> </p>

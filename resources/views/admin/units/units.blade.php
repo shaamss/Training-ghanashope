@@ -57,7 +57,9 @@
                             {{ (!is_null($showLinks) && $showLinks) ? $units->links() : ''}}
                             {{-- {{ $units->links() }} --}}
 
-                        <form method="post" action="{{ route('search-units') }}" >
+                            {{-- Search Unit --}}
+
+                        <form method="get" action="{{ route('search-units') }}" >
                                 @csrf
                                 <div class="row">
 
@@ -133,7 +135,7 @@
 
                     {{-- delete form --}}
 
-                    <form action="{{ route('units') }}" method="POST" style="position:relative">
+                    <form action="{{ route('units') }}" method="get" style="position:relative">
                             @csrf
                         <div class="modal-body">
                             <p id="delete-message"> </p>

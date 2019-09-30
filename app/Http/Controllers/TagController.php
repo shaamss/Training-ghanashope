@@ -13,6 +13,7 @@ class TagController extends Controller
         $tags =Tag::paginate(env('PAGINATION_COUNT'));
         return view('admin.tags.tags')->with([
             'tags' => $tags,
+            'showLinks' => true,
         ]);
     }
 
@@ -106,6 +107,21 @@ class TagController extends Controller
             'tag_search' => 'required'
         ]);
 
-        $tags = $request->input('tag_search');
+        $searchTerm = $request->input('tag_search');
+
+        $tags = Tag::where(
+            'tag', 'LIKE', '%' . $searchTerm . '%'
+        )->get();
+
+            if(count($tags)>0)
+            {
+                return view('admin.tags.tags')->with([
+                    'tags' =>$tags,
+                    'showLinks' => false,
+                ]);
+            }
+
+            Session::flash('message', 'Nothing Found !!!!');
+            return redirect()->back();
     }
 }
