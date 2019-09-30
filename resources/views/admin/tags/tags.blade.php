@@ -50,7 +50,7 @@
 
                     {{-- Search Tag --}}
 
-                    <form method="get" action="{{ route('search-tags') }}" >
+                    <form method="post" action="{{ route('search-tags') }}" >
                             @csrf
                             <div class="row">
 
@@ -128,7 +128,7 @@
 
                     {{-- delete form --}}
 
-                    <form action="{{ route('tags') }}" method="get" style="position:relative">
+                    <form action="{{ route('tags') }}" method="post" style="position:relative">
                             @csrf
                         <div class="modal-body">
                             <p id="delete-message"> </p>

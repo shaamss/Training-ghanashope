@@ -17,6 +17,23 @@ class TagController extends Controller
         ]);
     }
 
+
+     //validation if tag name exist
+     private function tagNameExist($tagName)
+     {
+         $tag = Tag::where(
+             'tag', '=' , $tagName
+         )->first();
+         if (!is_null($tag))
+         {
+             Session::flash('message', 'Tag Name [ ' . $tagName .  ' ] Already Exist');
+
+             return false;
+         }
+
+         return true;
+     }
+
     public function store(Request $request)
     {
         $request->validate([
@@ -24,6 +41,12 @@ class TagController extends Controller
         ]);
 
         $tagName = $request->input('tag_name');
+
+        if(! $this->tagNameExist($tagName))
+        {
+            Session::flash('message', 'This Tag [ ' . $tagName . ' ] Has Been Already Exist ');
+            return redirect()->back();
+        }
 
         $tag = Tag::where(
             'tag', '=', $tagName
@@ -60,21 +83,6 @@ class TagController extends Controller
 
     }
 
-     //validation if tag name exist
-     private function tagNameExist($tagName)
-     {
-         $tag = Tag::where(
-             'tag', '=' , $tagName
-         )->first();
-         if (!is_null($tag))
-         {
-             Session::flash('message', 'Tag Name [ ' . $tagName .  ' ] Already Exist');
-
-             return false;
-         }
-
-         return true;
-     }
 
     public function update(Request $request)
     {
