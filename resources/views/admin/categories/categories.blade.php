@@ -15,10 +15,7 @@
                                             <label for="category_name">Category Name</label>
                                             <input type="text" class="form-control" id="category_name" name="category_name" placeholder="Category Name" required >
                                         </div>
-                                        {{-- <div class="form-group col-md-6">
-                                                <label for="category_code">Category Code</label>
-                                                <input type="text" class="form-control" id="category_code" name="category_code" placeholder="Category Code" required >
-                                        </div> --}}
+
                                         <div class="form-group col-md-12">
                                             <button type="submit" class="btn btn-primary">Save New Category</button>
                                         </div>
