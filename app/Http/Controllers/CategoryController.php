@@ -55,12 +55,39 @@ class CategoryController extends Controller
 
     public function update(Request $request)
     {
+        $request->validate([
+            'category_name' => 'required',
+            'category_id' => 'required'
+        ]);
 
+        $categoryName = $request->input('category_name');
+        $categoryID = $request->input('category_id');
+
+        if($this->categoryNmaeExist($categoryName))
+        {
+            Session::flash('message', 'This Category [ ' . $categoryName . ' ] Is Already Name Exist ');
+            return redirect()->back();
+        }
+
+        $category = Category::find($categoryID);
+        $category->name = $categoryName ;
+        $category->save();
+
+        Session::flash('message', 'This Category [ ' . $categoryName . ' ] Has Been Updated !! ');
+        return redirect()->back();
     }
 
     public function delete(Request $request)
     {
+        $request->validate([
+            'category_id' => 'required',
+        ]);
 
+        $categoryID = $request->input('category_id');
+
+        $category = Category::destroy($categoryID);
+        Session::flash('message', 'This Category Has Been Deleted !!');
+        return redirect()->back();
     }
 
     public function search(Request $request)
@@ -83,7 +110,7 @@ class CategoryController extends Controller
                 ]);
             }
 
-            Session::flach('message', 'Nothing Found');
+            Session::flash('message', ' Nothing Found !!');
             return redirect()->back();
 
     }
