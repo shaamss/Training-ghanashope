@@ -36,6 +36,23 @@
                         {{-- {{ $categories->links() }} --}}
 
                         {{ (!is_null($showLinks) && $showLinks) ? $categories->links() : '' }}
+
+                            {{-- Search Category --}}
+
+                    <form method="get" action="{{ route('search-categories') }}" >
+                            @csrf
+                            <div class="row">
+
+                                    <div class="form-group col-md-6">
+                                        <input id="category_search" class="form-control" type="text" name="category_search" placeholder="Search Category" required >
+
+                                    </div>
+                                    <div class="form-group col-md-6" >
+                                        <button type="submit" class="btn btn-primary "><i class="fas fa-search"></i> </button>
+                                    </div>
+                            </div>
+                    </form>
+
                     </div>
                 </div>
             </div>

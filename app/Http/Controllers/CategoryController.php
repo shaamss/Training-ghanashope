@@ -65,6 +65,26 @@ class CategoryController extends Controller
 
     public function search(Request $request)
     {
+        $request->validate([
+            'category_search' => 'required',
+        ]);
+
+        $searchTerm = $request->input('category_search');
+
+        $categories = Category::where(
+            'name', 'LIKE', '%' . $searchTerm . '%'
+        )->get();
+
+            if(count($categories) > 0)
+            {
+                return view('admin.categories.categories')->with([
+                    'categories' => $categories,
+                    'showLinks' => false ,
+                ]);
+            }
+
+            Session::flach('message', 'Nothing Found');
+            return redirect()->back();
 
     }
 }
