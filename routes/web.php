@@ -14,6 +14,7 @@
 use App\City;
 use App\Country;
 use App\Http\Controllers\DataImportController;
+use App\Http\Controllers\ProductController;
 use App\User;
 use App\Image;
 use App\Product;
@@ -73,6 +74,13 @@ Route::group(['Auth','user_is_admin'], function () {
 
     // products
     Route::get('products','ProductController@index')->name('products');
+
+    Route::get('new-product', 'ProductController@newProduct')->name('new-product');
+    Route::get('update-product/{id}', 'ProductController@newProduct')->name('update-product');
+
+    Route::put('new-product/{id}', 'ProductController@update');
+    Route::post('new-product','ProductController@store');
+    Route::delete('products/{id}','ProductController@delete');
 
     // tags
     Route::get('tags','TagController@index')->name('tags');

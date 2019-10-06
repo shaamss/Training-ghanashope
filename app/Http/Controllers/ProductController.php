@@ -16,4 +16,40 @@ class ProductController extends Controller
             'currency_code' => $currencyCode,
         ]);
     }
+
+    public function newProduct($id = null)
+    {
+        $product = null ;
+
+        if(!is_null($id))
+        {
+            $product = Product::find($id);
+
+        }
+
+        return view('admin.products.new-prodect')->with([
+            'product' => $product,
+        ]);
+
+    }
+
+
+    public function delete($id)
+    {
+
+    }
+
+    public function update( $id,  Request $request )
+    {
+
+    }
+
+
+    public function store(Request $request)
+    {
+
+    }
+
+
+
 }
