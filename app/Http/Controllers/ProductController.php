@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Product;
+use App\Unit;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -23,12 +24,17 @@ class ProductController extends Controller
 
         if(!is_null($id))
         {
-            $product = Product::find($id);
+            $product = Product::with([
+                'hasUnit'
+            ])->find($id);
 
         }
 
+        $units = Unit::all();
+
         return view('admin.products.new-prodect')->with([
             'product' => $product,
+            'units' => $units,
         ]);
 
     }

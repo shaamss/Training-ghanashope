@@ -26,9 +26,21 @@
 
                                 <div class="form-group col-md-12">
                                         <label for="product_description">Product Description</label>
-                                        <textarea class="form-control" id="product_description"  name="product_description" cols="30"
+                                        <textarea required class="form-control" id="product_description"  name="product_description" cols="30"
                                          rows="3">{{ (! is_null($product) ) ? $product->description : '' }}</textarea>
 
+                                    </div>
+
+                                    <div class="form-group col-md-12">
+                                        <b-label  for="product_unit" >Product Unit</b-label>
+                                        <select class="form-control" name="product_unit" id="product_unit" required>
+                                            <option >Select A Category</option>
+                                            @foreach ($units as $unit)
+                                                <option value="{{ $unit->id }}"
+                                                    {{ (! is_null($product) && ($product->hasUnit->id === $unit->id)) ? 'selected' : '' }}
+                                                    > {{ $unit->unit_name }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                         </form>
 
