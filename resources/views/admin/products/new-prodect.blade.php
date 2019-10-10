@@ -42,6 +42,18 @@
                                             @endforeach
                                         </select>
                                     </div>
+                                    {{--  total  --}}
+                                    <div class="form-group col-md-6">
+                                            <label for="product_price">Product Price</label>
+                                            <input type="number" class="form-control" id="product_price" name="product_price" placeholder="Product Price" required
+                                            value="{{ (! is_null($product) ) ? $product->price : '' }}">
+                                    </div>
+                                    {{--  Total  --}}
+                                    <div class="form-group col-md-6">
+                                            <label for="product_total">Product Total</label>
+                                            <input type="number" class="form-control" id="product_total" name="product_total" placeholder="Product Total" required
+                                            value="{{ (! is_null($product) ) ? $product->total : '' }}">
+                                    </div>
                         </form>
 
                     </div>
