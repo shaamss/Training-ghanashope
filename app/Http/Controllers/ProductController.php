@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Product;
 use App\Unit;
 use Illuminate\Http\Request;
@@ -25,16 +26,19 @@ class ProductController extends Controller
         if(!is_null($id))
         {
             $product = Product::with([
-                'hasUnit'
+                'hasUnit',
+                'category'
             ])->find($id);
 
         }
 
         $units = Unit::all();
+        $categories=Category::all();
 
         return view('admin.products.new-prodect')->with([
             'product' => $product,
             'units' => $units,
+            'categories'=>$categories,
         ]);
 
     }

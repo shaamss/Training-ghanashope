@@ -31,10 +31,24 @@
 
                                     </div>
 
+                                    {{--  Categories  --}}
+                                    <div class="form-group col-md-12">
+                                            <b-label  for="product_category" >Product Category</b-label>
+                                            <select class="form-control" name="product_category" id="product_category" required>
+                                                <option >Select A Category</option>
+                                                @foreach ($categories as $category)
+                                                    <option value="{{ $category->id }}"
+                                                        {{ (! is_null($product) && ($product->category->id === $category->id)) ? 'selected' : '' }}
+                                                        > {{ $category->name }}</option>
+                                                @endforeach
+                                            </select>
+                                    </div>
+
+                                    {{--  Units  --}}
                                     <div class="form-group col-md-12">
                                         <b-label  for="product_unit" >Product Unit</b-label>
                                         <select class="form-control" name="product_unit" id="product_unit" required>
-                                            <option >Select A Category</option>
+                                            <option >Select A Unit</option>
                                             @foreach ($units as $unit)
                                                 <option value="{{ $unit->id }}"
                                                     {{ (! is_null($product) && ($product->hasUnit->id === $unit->id)) ? 'selected' : '' }}
