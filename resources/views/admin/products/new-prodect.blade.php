@@ -11,7 +11,7 @@
                     </div>
                     <div class="card-body">
 
-                        <form  action="{{ 'new-product' }}" method="POST">
+                        <form  action="{{ 'new-product' }}" method="POST" class="row">
                             @csrf
                             @if (! is_null($product))
                             <input type="hidden" name="_method" value="put" />
@@ -55,15 +55,27 @@
                                                     > {{ $unit->unit_name }}</option>
                                             @endforeach
                                         </select>
+
+                                        {{--  discount  --}}
                                     </div>
-                                    {{--  total  --}}
+
+
+                                    {{--  Price  --}}
                                     <div class="form-group col-md-6">
                                             <label for="product_price">Product Price</label>
                                             <input type="number" class="form-control" id="product_price" name="product_price" placeholder="Product Price" required
                                             value="{{ (! is_null($product) ) ? $product->price : '' }}">
                                     </div>
+
+                                     {{--  discount  --}}
+                                     <div class="form-group col-md-6">
+                                            <label for="product_discount">Product Discount</label>
+                                            <input type="number" class="form-control" id="product_discount" name="product_discount" placeholder="Product discount" required
+                                            value="{{ (! is_null($product) ) ? $product->discount : 0 }}">
+                                    </div>
+
                                     {{--  Total  --}}
-                                    <div class="form-group col-md-6">
+                                    <div class="form-group col-md-12">
                                             <label for="product_total">Product Total</label>
                                             <input type="number" class="form-control" id="product_total" name="product_total" placeholder="Product Total" required
                                             value="{{ (! is_null($product) ) ? $product->total : '' }}">
