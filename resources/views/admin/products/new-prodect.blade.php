@@ -80,6 +80,15 @@
                                             <input type="number" class="form-control" id="product_total" name="product_total" placeholder="Product Total" required
                                             value="{{ (! is_null($product) ) ? $product->total : '' }}">
                                     </div>
+
+                                    {{--  Option  --}}
+                                    <div class="form-group col-md-12">
+
+                                        <a class="btn btn-primary add-option-btn" href="#">Add Option</a>
+
+                                    </div>
+
+                                    {{--  End Option  --}}
                         </form>
 
                     </div>
@@ -89,4 +98,55 @@
         </div>
     </div>
 
+
+
+     {{-- Option  modal --}}
+     <div class="modal options-window" tabindex="-1" role="dialog" id="options-window">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Option</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body row">
+
+
+                                    <div class="form-group col-md-6">
+                                        <label for="option_name">Option Name</label>
+                                        <input type="text" class="form-control" id="option_name" name="option_name" placeholder="Option Name" required >
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                            <label for="option_value">Option Value</label>
+                                            <input type="text" class="form-control" id="option_value" name="option_value" placeholder="Option Value" required >
+                                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
+                  <button type="submit" class="btn btn-primary">ADD OPTION</button>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+
 @endsection
+ @section('script')
+          <script>
+          $(document).ready(function(){
+              var $optionWindow = $('#options-window');
+              var $addOptionBtn = $('.add-option-btn')
+              $addOptionBtn.on('click', function(e){
+                  e.preventDefault();
+                  $optionWindow.modal('show');
+              })
+
+          })
+          </script>
+
+
+ @endsection
