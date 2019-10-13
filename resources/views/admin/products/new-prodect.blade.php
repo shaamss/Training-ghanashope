@@ -52,7 +52,7 @@
                                             @foreach ($units as $unit)
                                                 <option value="{{ $unit->id }}"
                                                     {{ (! is_null($product) && ($product->hasUnit->id === $unit->id)) ? 'selected' : '' }}
-                                                    > {{ $unit->unit_name }}</option>
+                                                    > {{ $unit->formated() }}</option>
                                             @endforeach
                                         </select>
 
