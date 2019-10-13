@@ -10682,3 +10682,7 @@ span.product-head-title {
   font-weight: 900;
 }
 
+a.remove-option {
+  color: red;
+}
+

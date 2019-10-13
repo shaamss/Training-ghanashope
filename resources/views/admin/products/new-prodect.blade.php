@@ -84,6 +84,15 @@
                                     {{--  Option  --}}
                                     <div class="form-group col-md-12">
 
+                                         {{--  Table  --}}
+                                         <table id="options-table" class="table table-striped">
+                                                <tr>
+                                                        <th>Option Name</th>
+                                                        <th>Option Value</th>
+                                                        <th>Remov Option</th>
+                                                </tr>
+                                        </table>
+
                                         <a class="btn btn-primary add-option-btn" href="#">Add Option</a>
 
                                     </div>
@@ -126,7 +135,7 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
-                  <button type="submit" class="btn btn-primary">ADD OPTION</button>
+                  <button type="submit" class="btn btn-primary add-option-button">ADD OPTION</button>
                 </div>
 
               </div>
@@ -139,13 +148,62 @@
           <script>
           $(document).ready(function(){
               var $optionWindow = $('#options-window');
-              var $addOptionBtn = $('.add-option-btn')
+              var $addOptionBtn = $('.add-option-btn');
+              var $optionsTable = $('#options-table');
               $addOptionBtn.on('click', function(e){
                   e.preventDefault();
                   $optionWindow.modal('show');
-              })
+              });
+              //   delegate click evint from jquery to ajax requste
+              $(document).on('click','.remove-option',function(e){
+                e.preventDefault();
+                $(this).parent().parent().remove();
+              });
 
-          })
+            //   delegate click evint from jquery to ajax requste
+              $(document).on('click', '.add-option-button', function(e){
+                  e.preventDefault();
+
+                  var $optionName = $('#option_name');
+                  if($optionName.val() === '')
+                  {
+                      alert('Option Name is required');
+
+                      return false ;
+                  }
+                  var $optionValue = $('#option_value');
+                  if($optionValue.val() === '')
+                  {
+                      alert('Option Value is required');
+                      return false ;
+                  }
+
+                  var optionsRow= `
+
+                <tr>
+
+                    <td>
+                    `+ $optionName.val() +`
+                    </td>
+
+                    <td>
+                    `+ $optionValue.val() +`
+                    </td>
+
+                    <td>
+                    <a href="" class="remove-option"><i class="fas fa-minus-circle"></i></a>
+                    </td>
+                </tr>
+
+                  `;
+
+                  $optionsTable.append(
+                        optionsRow
+                  );
+                  $optionValue.val('');
+              });
+
+          });
           </script>
 
 
