@@ -78,7 +78,7 @@ Route::group(['Auth','user_is_admin'], function () {
     Route::get('new-product', 'ProductController@newProduct')->name('new-product');
     Route::get('update-product/{id}', 'ProductController@newProduct')->name('update-product');
 
-    Route::put('new-product/{id}', 'ProductController@update');
+    Route::put('update-product', 'ProductController@update')->name('update-product');
     Route::post('new-product','ProductController@store');
     Route::delete('products/{id}','ProductController@delete');
 

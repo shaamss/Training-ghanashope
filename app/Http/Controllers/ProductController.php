@@ -49,9 +49,9 @@ class ProductController extends Controller
 
     }
 
-    public function update( $id,  Request $request )
+    public function update($id =null, Request $request )
     {
-
+        dd($request);
     }
 
 

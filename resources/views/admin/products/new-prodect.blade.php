@@ -11,10 +11,11 @@
                     </div>
                     <div class="card-body">
 
-                        <form  action="{{ 'new-product' }}" method="POST" class="row">
+                        <form  action="{{ route('update-product') }}" method="POST" class="row">
                             @csrf
                             @if (! is_null($product))
-                            <input type="hidden" name="_method" value="put" />
+                            {{--  <input type="hidden" name="_method" value="put" />  --}}
+                            {{ method_field('PUT') }}
                             <input type="hidden" name="product_id" value="{{ $product->id }}" />
                             @endif
 
@@ -24,6 +25,7 @@
                                     value="{{ (! is_null($product) ) ? $product->title : '' }}">
                                 </div>
 
+                                {{--  Discription  --}}
                                 <div class="form-group col-md-12">
                                         <label for="product_description">Product Description</label>
                                         <textarea required class="form-control" id="product_description"  name="product_description" cols="30"
@@ -98,6 +100,12 @@
                                     </div>
 
                                     {{--  End Option  --}}
+
+                                    {{--  <input type="text" name="color[]" value="1"/>
+                                    <input type="text" name="color[]" value="2"/>
+                                    <input type="text" name="color[]" value="3"/>
+                                    --}}
+                                    {{--  <button type="submit">test</button>  --}}
                         </form>
 
                     </div>
@@ -192,6 +200,7 @@
 
                     <td>
                     <a href="" class="remove-option"><i class="fas fa-minus-circle"></i></a>
+                    <input type="hidden" name="`+ $optionName.val() +` []" value="`+ $optionValue.val() +`" />
                     </td>
                 </tr>
 
