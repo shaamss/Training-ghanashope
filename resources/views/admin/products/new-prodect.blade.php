@@ -11,7 +11,7 @@
                     </div>
                     <div class="card-body">
 
-                        <form  action="{{ route('update-product') }}" method="POST" class="row">
+                        <form  action="{{ (! is_null($product)) ? route('update-product') : route('new-product') }}" method="POST" class="row">
                             @csrf
                             @if (! is_null($product))
                             {{--  <input type="hidden" name="_method" value="put" />  --}}
@@ -28,7 +28,7 @@
                                 {{--  Discription  --}}
                                 <div class="form-group col-md-12">
                                         <label for="product_description">Product Description</label>
-                                        <textarea required class="form-control" id="product_description"  name="product_description" cols="30"
+                                        <textarea placeholder="Product Description" required class="form-control" id="product_description"  name="product_description" cols="30"
                                          rows="3">{{ (! is_null($product) ) ? $product->description : '' }}</textarea>
 
                                     </div>
@@ -58,21 +58,21 @@
                                             @endforeach
                                         </select>
 
-                                        {{--  discount  --}}
+
                                     </div>
 
 
                                     {{--  Price  --}}
                                     <div class="form-group col-md-6">
                                             <label for="product_price">Product Price</label>
-                                            <input type="number" class="form-control" id="product_price" name="product_price" placeholder="Product Price" required
+                                            <input type="number" class="form-control" step="any" id="product_price" name="product_price" placeholder="Product Price" required
                                             value="{{ (! is_null($product) ) ? $product->price : '' }}">
                                     </div>
 
                                      {{--  discount  --}}
                                      <div class="form-group col-md-6">
                                             <label for="product_discount">Product Discount</label>
-                                            <input type="number" class="form-control" id="product_discount" name="product_discount" placeholder="Product discount" required
+                                            <input type="number" class="form-control" step="any" id="product_discount" name="product_discount" placeholder="Product discount" required
                                             value="{{ (! is_null($product) ) ? $product->discount : 0 }}">
                                     </div>
 
@@ -95,8 +95,10 @@
                                                 </tr>
                                         </table>
 
-                                        <a class="btn btn-primary add-option-btn" href="#">Add Option</a>
-
+                                        <a class="btn btn-outline-dark add-option-btn" href="#">Add Option</a>
+                                    </div>
+                                    <div class="form-group col-md-6 offset-md-3">
+                                    <button type="submit" class="btn btn-primary btn-block">SAVE</button>
                                     </div>
 
                                     {{--  End Option  --}}
